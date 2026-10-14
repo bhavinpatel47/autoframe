@@ -1,0 +1,12 @@
+[Unit]
+Description=Autoframe face-tracking virtual webcam
+Documentation=https://github.com/bhavinpatel47/autoframe
+
+[Service]
+Type=simple
+ExecStart=@BIN@ run
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

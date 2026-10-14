@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autoframe"
+dynamic = ["version"]
+description = "Face-tracking auto-framing (Center Stage style) virtual webcam for Linux"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "src/autoframe/models/LICENSE-yunet"]
+requires-python = ">=3.10"
+authors = [{ name = "Bhavin Patel" }]
+keywords = ["webcam", "v4l2loopback", "face-tracking", "center-stage", "auto-framing", "linux"]
+classifiers = [
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Video :: Capture",
+    "Environment :: No Input/Output (Daemon)",
+]
+dependencies = [
+    "numpy>=1.24",
+    "opencv-python>=4.8",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+autoframe = "autoframe.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "autoframe.__version__" }
+
+[tool.setuptools.package-data]
+autoframe = ["models/*.onnx", "models/LICENSE-yunet"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
